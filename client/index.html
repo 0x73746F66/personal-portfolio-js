@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Christopher Langton</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Page-Enter" content="RevealTrans(Duration=2.0,Transition=2)">
+    <meta http-equiv="Page-Exit" content="RevealTrans(Duration=3.0,Transition=12)">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="Cache-control" content="private">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="imagetoolbar" content="false">
+    <meta name="description" content="Just a site to show my work.">
+    <meta name="copyright" content="Copyright 2013 Christopher D Langton">
+    <meta name="distribution" content="IU">
+    <meta name="revisit-after" content="1 week">
+    <meta name="language" content="EN">
+    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection">
+    <meta name="contact" content="chris@codewiz.com">
+    <meta name="reply-to" content="chris@codewiz.com">
+    <meta name="web_author" content="Christopher D. Langton">
+    <!-- <meta name="image_src" content="/asset/img/facebook.png"> -->
+    <meta name="application-name" content="Open Group Chat">
+    <meta name="tweetmeme-title" content="Open Group Chat">
+    <meta name="summary" content="Chat between PC's Openly - Nothing is logged anywhere. Ever.">
+    <meta name="url" content="http://open-group-chat.herokuapp.com/">
+    <meta name="msapplication-tooltip" content="Chat between PC's Openly - Nothing is logged anywhere. Ever.">
+    <meta name="msapplication-starturl" content="http://open-group-chat.herokuapp.com/">
+    <meta name="msapplication-window" content="width=1024;height=768">
+    <meta name="msapplication-navbutton-color" content="#D64">
+    <meta name="msapplication-TileImage" content="/asset/img/facebook.png">
+    <meta name="msapplication-TileColor" content="#D64">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Christopher Langton">
+    <meta property="fb:app_id" content="codewiz.biz">
+    <meta property="fb:admins" content="chrisdlangton">
+    <meta property="og:url" content="http://open-group-chat.herokuapp.com/">
+    <meta property="og:image" content="/asset/img/facebook.png">
+    <meta property="og:title" content="Chat between PC's Openly - Nothing is logged anywhere. Ever.">
+    <meta property="og:description"
+          content="Open Group Chat is a NodeJS project using the latest web technologies to provide fast open collaboration and privacy.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://open-group-chat.herokuapp.com/">
+    <meta name="twitter:creator" content="@chrisdlangton">
+    <meta name="twitter:site" content="@codewiz_biz">
+    <meta name="twitter:title" content="Open Group Chat">
+    <meta name="twitter:description" content="Chat between PC's Openly - Nothing is logged anywhere. Ever.">
+    <meta name="twitter:image" content="/asset/img/facebook.png">
+    <link rel="canonical" href="http://open-group-chat.herokuapp.com/">
+    <link rel="icon" href="/asset/img/favicon.ico" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="/asset/css/main.css">
+    <link rel="stylesheet" href="/asset/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/asset/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/asset/css/angular-toggle-switch.css">
+</head>
+<body ng-app="portfolio">
+<header>
+    <section aria-labelledby="menuHeading" ng-controller="MenuCtrl" ng-show="auth" class="ng-hide">
+        <div class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+            <div class="navbar-inner">
+                <span class="pull-left emphasis" id="menuHeading"><img ng-src="{{image}}" src="" class="img-circle"> Christopher Langton</span>
+
+                <div class="pull-right">
+                    <a href="#settings" role="button" class="btn btn-lg" data-toggle="modal">
+                        <span class="glyphicon glyphicon-cog text-warning"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    </section>
+    <!-- /ng-controller="MenuCtrl" -->
+</header>
+<!-- Settings Modal -->
+<section aria-labelledby="preferencesHeading" ng-controller="SettingsCtrl">
+    <div id="settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="preferencesHeading">Preferences</h4>
+                </div>
+                <form class="form-horizontal" role="form" ng-submit="save()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label" for="settingsDisplayName">Display Name</label>
+
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Handle
+                                    </span>
+                                <input type="text" ng-model="settings.name" placeholder="display name"
+                                       class="form-control" id="settingsDisplayName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label" for="settingsUrl">Your Profile Url</label>
+
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Url
+                                    </span>
+                                <input type="url" ng-model="settings.url" placeholder="http://example.com"
+                                       class="form-control" id="settingsUrl">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label" for="settingsColor">Message Text</label>
+
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Color
+                                    </span>
+                                <input type="color" ng-model="settings.color" class="form-control" id="settingsColor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label" for="settingsMessages">Local History</label>
+
+                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Messages
+                                    </span>
+                                <input type="number" min="10" max="100" step="5" ng-model="settings.messages"
+                                       class="form-control" id="settingsMessages">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label" for="settingsNotifications">Enable
+                                Notifications</label>
+
+                            <div toggle-switch model="settings.notifications" id="settingsNotifications"></div>
+                        </div>
+                        <div ng-show="settings.notifications" class="ng-hide form-group">
+                            <label class="col-lg-6 control-label" for="settingsNotificationsLeave">Announce User Leave
+                                Room</label>
+
+                            <div toggle-switch model="settings.leave" id="settingsNotificationsLeave"></div>
+                        </div>
+                        <div ng-show="settings.notifications" class="ng-hide form-group">
+                            <label class="col-lg-6 control-label" for="settingsNotificationsJoin">Announce User Join
+                                Room</label>
+
+                            <div toggle-switch model="settings.join" id="settingsNotificationsJoin"></div>
+                        </div>
+                        <div ng-show="settings.notifications" class="ng-hide form-group">
+                            <label class="col-lg-6 control-label" for="settingsNotificationsLogin">Announce User
+                                Login</label>
+
+                            <div toggle-switch model="settings.login" id="settingsNotificationsLogin"></div>
+                        </div>
+                        <div ng-show="settings.notifications" class="ng-hide form-group">
+                            <label class="col-lg-6 control-label" for="settingsNotificationsLobby">Announce Lobby
+                                Arrivals</label>
+
+                            <div toggle-switch model="settings.lobby" id="settingsNotificationsLobby"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" ng-click="save()" data-dismiss="modal">Save
+                            changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</section>
+<!-- /ng-controller="SettingsCtrl" -->
+<main class="container-fluid">
+    <section aria-labelledby="linksHeading" ng-controller="IndexCtrl" ng-show="auth" class="ng-hide" aria-hidden="true">
+        <div class="row">
+            <div class="col-md-3 well">
+                <div class="panel panel-warning">
+                    <button type="button" class="btn btn-default pull-right" toggle-button="links"><span toggle-icon
+                                                                                                         class="glyphicon glyphicon-chevron-left"></span>&nbsp;<span
+                            toggle-text>Hide</span></button>
+                    <div class="panel-heading" id="linksHeading">Links</div>
+                    <div id="links">
+                        <div ng-repeat="link in links | orderBy:'link.order'" class="panel-body">
+                            <!-- display each link here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- page here -->
+            </div>
+        </div>
+    </section>
+    <!-- /ng-controller="IndexCtrl" -->
+</main>
+<footer>
+</footer>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/lib/angular.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8"
+        src="/asset/js/lib/angular-toggle-switch.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8"
+        src="/asset/js/lib/ui-bootstrap-custom-0.6.0.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8"
+        src="/asset/js/lib/ui-bootstrap-custom-tpls-0.6.0.min.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8"
+        src="https://apis.google.com/js/client.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8">
+    window.ogc = {
+        module: angular.module('portfolio', ['toggle-switch', 'ui.bootstrap']).config(function ($sceProvider) {
+            $sceProvider.enabled(false);
+        }),
+        index: io.connect('/index'),
+        article: io.connect('/article'),
+        notifications: ( "Notification" in window ) ? true : false
+    };
+</script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/controller/landing.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/controller/menu.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/controller/chat.js"></script>
+<script type="text/javascript" language="javascript" charset="utf-8" src="/asset/js/controller/settings.js"></script>
+</body>
+</html>
